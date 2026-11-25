@@ -84,6 +84,23 @@ def fetch(url, path):
     return path
 
 
+def fade_foundation(img):
+    """淡化贴图底部的浅色雪地地基，让建筑在草地上不显得突兀。
+
+    只降低底部 30% 区域内浅色低饱和像素的不透明度，不改动颜色与形状，
+    避免误删建筑本体的白色墙面。
+    """
+    img = img.copy()
+    px = img.load()
+    w, h = img.size
+    for y in range(int(h * 0.70), h):
+        for x in range(w):
+            r, g, b, a = px[x, y]
+            if a and min(r, g, b) >= 205 and max(r, g, b) - min(r, g, b) <= 34:
+                px[x, y] = (r, g, b, 130)
+    return img
+
+
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
     os.makedirs(CACHE_DIR, exist_ok=True)
@@ -129,6 +146,8 @@ def main():
                              bounds["x"] + bounds["width"],
                              bounds["y"] + bounds["height"]))
             name = key if facing == 0 else f"{key}_f{facing}"
+            if kind == "building":
+                img = fade_foundation(img)
             img.save(os.path.join(OUT_DIR, f"{name}.png"))
             saved.append(img.size)
         meta[key] = {"entity": eid, "kind": kind, "facings": ta["facing_count"],

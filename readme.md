@@ -72,6 +72,7 @@ docs/
 
 - 图集是原版游戏模型的渲染派生结果，**图像版权归 Electronic Arts 所有**，本项目仅作学习与
   致敬用途，未分发任何原版游戏文件（MIX / SHP / VXL / INI 等）
+- 切图时会把建筑贴图底部的浅色雪地地基降为半透明，使其与随机地图的草地自然融合
 - 如需重新生成：`python tools/build_sprites.py`（需要 Pillow 与网络，产物会覆盖现有贴图）
 - 删除 `game/assets/sprites/` 后游戏仍可运行，渲染会自动回落到程序化绘制
 
