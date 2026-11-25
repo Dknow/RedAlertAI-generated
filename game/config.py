@@ -70,8 +70,8 @@ PLAYER_COLORS = [
 # 经济
 START_CREDITS = 10000
 REFINERY_STORAGE = 500          # 矿车一次满载可卸载的资金
-HARVEST_RATE = 140.0            # 每秒开采资金
-ORE_TILE_VALUE = 500            # 每格矿脉总量（资金）
+HARVEST_RATE = 180.0            # 每秒开采资金
+ORE_TILE_VALUE = 650            # 每格矿脉总量（资金）
 ORE_REGROW = 0.0                # 矿脉再生速度（每格每秒）
 
 # 建造
@@ -86,7 +86,7 @@ VET_DAMAGE = (1.0, 1.2, 1.45)   # 0/1/2 级伤害倍率
 VET_HP = (1.0, 1.15, 1.3)
 SPLASH_FALLOFF = 0.35
 FRIENDLY_FIRE = 0.35            # 溅射对友军伤害比例
-SUPERWEAPON_CHARGE = 300.0      # 超武充能秒数（建造完成后）
+SUPERWEAPON_CHARGE = 180.0      # 超武充能秒数（建造完成后）
 
 # 迷雾
 FOG_UPDATE_INTERVAL = 0.22

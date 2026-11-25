@@ -109,14 +109,25 @@ class AIController:
         # 超级武器
         if self.count("radar") > 0:
             sup = {"allied": "a_super", "soviet": "s_super", "yuri": "y_super"}[p.faction]
-            if self.count(sup.split("_")[1]) == 0 and p.credits > 5500:
+            if self.count(sup.split("_")[1]) == 0 and p.credits > 5200:
                 self.try_build(sup)
 
-        # 部队
+        # 部队（达到常备上限后停止暴兵；安全时攒钱推超级武器）
+        cap = {"简单": 10, "普通": 14, "困难": 18}.get(self.diff["name"], 14)
         army = [u for u in p.units(w, include_harvester=False)]
-        if (need_harv or need_ref) and p.credits < 1600:
+        near_attack = False
+        for e in w.entities.values():
+            if not e.dead and not e.is_building and e.owner is not p:
+                if math.hypot(e.x - cy.x, e.y - cy.y) < 12 * C.TILE:
+                    near_attack = True
+                    break
+        saving = (self.count("radar") > 0 and self.count("super") == 0
+                  and p.credits < 5200 and not near_attack)
+        if saving:
+            pass                 # 安全期攒钱出超级武器
+        elif (need_harv or need_ref) and p.credits < 1600:
             pass                 # 先攒钱补经济，避免断档后无力回天
-        elif len(army) < 80 and p.credits > 500:
+        elif len(army) < cap and p.credits > 500:
             self._build_army(army)
         # 进攻
         self._attack(army, cy)
