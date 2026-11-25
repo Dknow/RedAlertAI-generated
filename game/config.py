@@ -2,7 +2,7 @@
 """全局常量与平衡性参数。"""
 
 APP_NAME = "红色警戒：心灵风暴"
-APP_SUBTITLE = "RA2 玩法致敬复刻版 · 原创素材"
+APP_SUBTITLE = "RA2 玩法致敬复刻版"
 VERSION = "1.0.0"
 
 SCREEN_W = 1280

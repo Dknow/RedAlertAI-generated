@@ -1,0 +1,977 @@
+{
+ "a_barracks": {
+  "entity": "GAPILE",
+  "kind": "building",
+  "facings": 1,
+  "frames": [
+   [
+    103,
+    94
+   ]
+  ]
+ },
+ "a_cy": {
+  "entity": "GACNST",
+  "kind": "building",
+  "facings": 1,
+  "frames": [
+   [
+    101,
+    65
+   ]
+  ]
+ },
+ "a_engineer": {
+  "entity": "ENGINEER",
+  "kind": "infantry",
+  "facings": 8,
+  "frames": [
+   [
+    43,
+    80
+   ],
+   [
+    48,
+    80
+   ],
+   [
+    34,
+    80
+   ],
+   [
+    42,
+    80
+   ],
+   [
+    45,
+    80
+   ],
+   [
+    48,
+    80
+   ],
+   [
+    34,
+    80
+   ],
+   [
+    39,
+    80
+   ]
+  ]
+ },
+ "a_factory": {
+  "entity": "GAWEAP",
+  "kind": "building",
+  "facings": 1,
+  "frames": [
+   [
+    108,
+    80
+   ]
+  ]
+ },
+ "a_grizzly": {
+  "entity": "MTNK",
+  "kind": "vehicle",
+  "facings": 1,
+  "frames": [
+   [
+    106,
+    58
+   ]
+  ]
+ },
+ "a_harvester": {
+  "entity": "CMIN",
+  "kind": "vehicle",
+  "facings": 1,
+  "frames": [
+   [
+    108,
+    82
+   ]
+  ]
+ },
+ "a_heli": {
+  "entity": "SHAD",
+  "kind": "vehicle",
+  "facings": 1,
+  "frames": [
+   [
+    106,
+    65
+   ]
+  ]
+ },
+ "a_ifv": {
+  "entity": "FV",
+  "kind": "vehicle",
+  "facings": 1,
+  "frames": [
+   [
+    106,
+    83
+   ]
+  ]
+ },
+ "a_pillbox": {
+  "entity": "GAPILL",
+  "kind": "building",
+  "facings": 1,
+  "frames": [
+   [
+    102,
+    58
+   ]
+  ]
+ },
+ "a_power": {
+  "entity": "GAPOWR",
+  "kind": "building",
+  "facings": 1,
+  "frames": [
+   [
+    91,
+    78
+   ]
+  ]
+ },
+ "a_prism": {
+  "entity": "SREF",
+  "kind": "vehicle",
+  "facings": 1,
+  "frames": [
+   [
+    108,
+    72
+   ]
+  ]
+ },
+ "a_prismtower": {
+  "entity": "ATESLA",
+  "kind": "building",
+  "facings": 1,
+  "frames": [
+   [
+    71,
+    71
+   ]
+  ]
+ },
+ "a_radar": {
+  "entity": "GAAIRC",
+  "kind": "building",
+  "facings": 1,
+  "frames": [
+   [
+    90,
+    96
+   ]
+  ]
+ },
+ "a_refinery": {
+  "entity": "GAREFN",
+  "kind": "building",
+  "facings": 1,
+  "frames": [
+   [
+    106,
+    82
+   ]
+  ]
+ },
+ "a_rifle": {
+  "entity": "E1",
+  "kind": "infantry",
+  "facings": 8,
+  "frames": [
+   [
+    36,
+    80
+   ],
+   [
+    53,
+    80
+   ],
+   [
+    65,
+    80
+   ],
+   [
+    53,
+    80
+   ],
+   [
+    33,
+    80
+   ],
+   [
+    50,
+    80
+   ],
+   [
+    66,
+    80
+   ],
+   [
+    56,
+    80
+   ]
+  ]
+ },
+ "a_rocket": {
+  "entity": "GGI",
+  "kind": "infantry",
+  "facings": 8,
+  "frames": [
+   [
+    40,
+    80
+   ],
+   [
+    56,
+    80
+   ],
+   [
+    64,
+    80
+   ],
+   [
+    41,
+    80
+   ],
+   [
+    40,
+    80
+   ],
+   [
+    56,
+    80
+   ],
+   [
+    64,
+    80
+   ],
+   [
+    44,
+    80
+   ]
+  ]
+ },
+ "a_super": {
+  "entity": "GAWEAT",
+  "kind": "building",
+  "facings": 1,
+  "frames": [
+   [
+    98,
+    81
+   ]
+  ]
+ },
+ "s_apoc": {
+  "entity": "APOC",
+  "kind": "vehicle",
+  "facings": 1,
+  "frames": [
+   [
+    106,
+    70
+   ]
+  ]
+ },
+ "s_barracks": {
+  "entity": "NAHAND",
+  "kind": "building",
+  "facings": 1,
+  "frames": [
+   [
+    77,
+    75
+   ]
+  ]
+ },
+ "s_conscript": {
+  "entity": "E2",
+  "kind": "infantry",
+  "facings": 8,
+  "frames": [
+   [
+    51,
+    80
+   ],
+   [
+    64,
+    80
+   ],
+   [
+    56,
+    80
+   ],
+   [
+    36,
+    80
+   ],
+   [
+    43,
+    80
+   ],
+   [
+    64,
+    80
+   ],
+   [
+    58,
+    80
+   ],
+   [
+    42,
+    80
+   ]
+  ]
+ },
+ "s_cy": {
+  "entity": "NACNST",
+  "kind": "building",
+  "facings": 1,
+  "frames": [
+   [
+    98,
+    73
+   ]
+  ]
+ },
+ "s_drone": {
+  "entity": "DRON",
+  "kind": "vehicle",
+  "facings": 8,
+  "frames": [
+   [
+    85,
+    65
+   ],
+   [
+    92,
+    76
+   ],
+   [
+    88,
+    77
+   ],
+   [
+    88,
+    64
+   ],
+   [
+    88,
+    68
+   ],
+   [
+    89,
+    62
+   ],
+   [
+    92,
+    57
+   ],
+   [
+    99,
+    63
+   ]
+  ]
+ },
+ "s_factory": {
+  "entity": "NAWEAP",
+  "kind": "building",
+  "facings": 1,
+  "frames": [
+   [
+    105,
+    96
+   ]
+  ]
+ },
+ "s_flak": {
+  "entity": "FLAKT",
+  "kind": "infantry",
+  "facings": 8,
+  "frames": [
+   [
+    29,
+    80
+   ],
+   [
+    54,
+    80
+   ],
+   [
+    80,
+    80
+   ],
+   [
+    59,
+    80
+   ],
+   [
+    34,
+    80
+   ],
+   [
+    61,
+    80
+   ],
+   [
+    88,
+    75
+   ],
+   [
+    52,
+    80
+   ]
+  ]
+ },
+ "s_flakcannon": {
+  "entity": "NAFLAK",
+  "kind": "building",
+  "facings": 8,
+  "frames": [
+   [
+    106,
+    80
+   ],
+   [
+    106,
+    75
+   ],
+   [
+    106,
+    80
+   ],
+   [
+    106,
+    91
+   ],
+   [
+    100,
+    98
+   ],
+   [
+    94,
+    96
+   ],
+   [
+    102,
+    98
+   ],
+   [
+    106,
+    91
+   ]
+  ]
+ },
+ "s_harvester": {
+  "entity": "HARV",
+  "kind": "vehicle",
+  "facings": 1,
+  "frames": [
+   [
+    108,
+    84
+   ]
+  ]
+ },
+ "s_kirov": {
+  "entity": "ZEP",
+  "kind": "vehicle",
+  "facings": 1,
+  "frames": [
+   [
+    106,
+    64
+   ]
+  ]
+ },
+ "s_power": {
+  "entity": "NAPOWR",
+  "kind": "building",
+  "facings": 1,
+  "frames": [
+   [
+    93,
+    62
+   ]
+  ]
+ },
+ "s_radar": {
+  "entity": "NARADR",
+  "kind": "building",
+  "facings": 1,
+  "frames": [
+   [
+    81,
+    70
+   ]
+  ]
+ },
+ "s_refinery": {
+  "entity": "NAREFN",
+  "kind": "building",
+  "facings": 1,
+  "frames": [
+   [
+    105,
+    96
+   ]
+  ]
+ },
+ "s_rhino": {
+  "entity": "HTNK",
+  "kind": "vehicle",
+  "facings": 1,
+  "frames": [
+   [
+    106,
+    67
+   ]
+  ]
+ },
+ "s_sentry": {
+  "entity": "NALASR",
+  "kind": "building",
+  "facings": 8,
+  "frames": [
+   [
+    104,
+    69
+   ],
+   [
+    104,
+    68
+   ],
+   [
+    104,
+    69
+   ],
+   [
+    104,
+    64
+   ],
+   [
+    104,
+    70
+   ],
+   [
+    104,
+    74
+   ],
+   [
+    104,
+    71
+   ],
+   [
+    104,
+    64
+   ]
+  ]
+ },
+ "s_super": {
+  "entity": "NAMISL",
+  "kind": "building",
+  "facings": 1,
+  "frames": [
+   [
+    101,
+    82
+   ]
+  ]
+ },
+ "s_tesla": {
+  "entity": "SHK",
+  "kind": "infantry",
+  "facings": 8,
+  "frames": [
+   [
+    61,
+    80
+   ],
+   [
+    43,
+    80
+   ],
+   [
+    40,
+    80
+   ],
+   [
+    56,
+    80
+   ],
+   [
+    58,
+    80
+   ],
+   [
+    43,
+    80
+   ],
+   [
+    35,
+    80
+   ],
+   [
+    56,
+    80
+   ]
+  ]
+ },
+ "s_v3": {
+  "entity": "V3",
+  "kind": "vehicle",
+  "facings": 1,
+  "frames": [
+   [
+    106,
+    87
+   ]
+  ]
+ },
+ "y_barracks": {
+  "entity": "YABRCK",
+  "kind": "building",
+  "facings": 1,
+  "frames": [
+   [
+    88,
+    82
+   ]
+  ]
+ },
+ "y_brute": {
+  "entity": "BRUTE",
+  "kind": "infantry",
+  "facings": 8,
+  "frames": [
+   [
+    87,
+    78
+   ],
+   [
+    69,
+    80
+   ],
+   [
+    42,
+    80
+   ],
+   [
+    71,
+    80
+   ],
+   [
+    88,
+    70
+   ],
+   [
+    71,
+    80
+   ],
+   [
+    42,
+    80
+   ],
+   [
+    71,
+    80
+   ]
+  ]
+ },
+ "y_chaos": {
+  "entity": "CAOS",
+  "kind": "vehicle",
+  "facings": 1,
+  "frames": [
+   [
+    108,
+    70
+   ]
+  ]
+ },
+ "y_cy": {
+  "entity": "YACNST",
+  "kind": "building",
+  "facings": 1,
+  "frames": [
+   [
+    103,
+    67
+   ]
+  ]
+ },
+ "y_disc": {
+  "entity": "DISK",
+  "kind": "vehicle",
+  "facings": 1,
+  "frames": [
+   [
+    106,
+    55
+   ]
+  ]
+ },
+ "y_factory": {
+  "entity": "YAWEAP",
+  "kind": "building",
+  "facings": 1,
+  "frames": [
+   [
+    108,
+    80
+   ]
+  ]
+ },
+ "y_gatling": {
+  "entity": "YAGGUN",
+  "kind": "building",
+  "facings": 8,
+  "frames": [
+   [
+    99,
+    79
+   ],
+   [
+    99,
+    79
+   ],
+   [
+    99,
+    79
+   ],
+   [
+    99,
+    79
+   ],
+   [
+    99,
+    79
+   ],
+   [
+    99,
+    79
+   ],
+   [
+    99,
+    79
+   ],
+   [
+    99,
+    79
+   ]
+  ]
+ },
+ "y_harvester": {
+  "entity": "SMIN",
+  "kind": "vehicle",
+  "facings": 1,
+  "frames": [
+   [
+    106,
+    74
+   ]
+  ]
+ },
+ "y_initiate": {
+  "entity": "INIT",
+  "kind": "infantry",
+  "facings": 8,
+  "frames": [
+   [
+    48,
+    80
+   ],
+   [
+    53,
+    80
+   ],
+   [
+    51,
+    80
+   ],
+   [
+    57,
+    80
+   ],
+   [
+    51,
+    80
+   ],
+   [
+    53,
+    80
+   ],
+   [
+    49,
+    80
+   ],
+   [
+    53,
+    80
+   ]
+  ]
+ },
+ "y_lasher": {
+  "entity": "LTNK",
+  "kind": "vehicle",
+  "facings": 1,
+  "frames": [
+   [
+    106,
+    71
+   ]
+  ]
+ },
+ "y_magnet": {
+  "entity": "TELE",
+  "kind": "vehicle",
+  "facings": 1,
+  "frames": [
+   [
+    106,
+    69
+   ]
+  ]
+ },
+ "y_mc": {
+  "entity": "MIND",
+  "kind": "vehicle",
+  "facings": 1,
+  "frames": [
+   [
+    106,
+    68
+   ]
+  ]
+ },
+ "y_power": {
+  "entity": "YAPOWR",
+  "kind": "building",
+  "facings": 1,
+  "frames": [
+   [
+    83,
+    80
+   ]
+  ]
+ },
+ "y_prime": {
+  "entity": "YURI",
+  "kind": "infantry",
+  "facings": 8,
+  "frames": [
+   [
+    46,
+    80
+   ],
+   [
+    43,
+    80
+   ],
+   [
+    48,
+    80
+   ],
+   [
+    53,
+    80
+   ],
+   [
+    45,
+    80
+   ],
+   [
+    48,
+    80
+   ],
+   [
+    53,
+    80
+   ],
+   [
+    53,
+    80
+   ]
+  ]
+ },
+ "y_psychtower": {
+  "entity": "YAPSYT",
+  "kind": "building",
+  "facings": 1,
+  "frames": [
+   [
+    70,
+    77
+   ]
+  ]
+ },
+ "y_radar": {
+  "entity": "YACOMD",
+  "kind": "building",
+  "facings": 1,
+  "frames": [
+   [
+    83,
+    80
+   ]
+  ]
+ },
+ "y_refinery": {
+  "entity": "YAREFN",
+  "kind": "building",
+  "facings": 8,
+  "frames": [
+   [
+    101,
+    69
+   ],
+   [
+    101,
+    69
+   ],
+   [
+    101,
+    69
+   ],
+   [
+    101,
+    69
+   ],
+   [
+    101,
+    69
+   ],
+   [
+    101,
+    69
+   ],
+   [
+    101,
+    69
+   ],
+   [
+    101,
+    69
+   ]
+  ]
+ },
+ "y_super": {
+  "entity": "YAPPET",
+  "kind": "building",
+  "facings": 1,
+  "frames": [
+   [
+    89,
+    78
+   ]
+  ]
+ }
+}

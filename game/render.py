@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
-"""全部美术资源程序化生成与绘制（无外部图片）。"""
+"""美术资源绘制：优先使用 game/assets/sprites/ 下的精灵图，缺图时回落到程序化绘制。"""
+import json
 import math
+import os
 import random
 
 import pygame
@@ -11,6 +13,9 @@ from .nav import px_to_tile
 
 T = C.TILE
 BUCKETS = 32
+ASSET_SPRITES = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets", "sprites")
+# 精灵图默认朝向为屏幕右下（45°），旋转时需补偿
+SPRITE_BASE_ANGLE = 45.0
 
 
 # ---------------------------------------------------------------- 颜色工具
@@ -26,6 +31,41 @@ def mix(a, b, t):
             int(a[2] + (b[2] - a[2]) * t))
 
 
+class SpriteBank:
+    """可选的外部精灵图库，meta.json 由 tools/build_sprites.py 生成。"""
+
+    def __init__(self, root=ASSET_SPRITES):
+        self.root = root
+        self.meta = {}
+        self.cache = {}
+        path = os.path.join(root, "meta.json")
+        if os.path.isfile(path):
+            try:
+                with open(path, encoding="utf-8") as f:
+                    self.meta = json.load(f)
+            except (OSError, ValueError):
+                self.meta = {}
+
+    def info(self, key):
+        return self.meta.get(key)
+
+    def image(self, key, facing=0):
+        """读取指定朝向的原始贴图，缺失返回 None。"""
+        ck = (key, facing)
+        if ck in self.cache:
+            return self.cache[ck]
+        name = key if facing == 0 else f"{key}_f{facing}"
+        path = os.path.join(self.root, name + ".png")
+        img = None
+        if os.path.isfile(path):
+            try:
+                img = pygame.image.load(path).convert_alpha()
+            except pygame.error:
+                img = None
+        self.cache[ck] = img
+        return img
+
+
 class Renderer:
     def __init__(self, world):
         self.world = world
@@ -33,6 +73,9 @@ class Renderer:
         self.ore_last = [0.0] * (C.MAP_W * C.MAP_H)
         self.unit_cache = {}
         self.bld_cache = {}
+        self.sprites = SpriteBank()
+        self.unit_art_cache = {}
+        self.bld_layout = {}
         self.minimap_base = self._make_minimap()
         self.fog_surf = pygame.Surface((C.VIEW_W, C.VIEW_H), pygame.SRCALPHA)
         self.ghost_cache = {}
@@ -127,10 +170,14 @@ class Renderer:
         hit = self.unit_cache.get(ck)
         if hit:
             return hit
+        d = D.UNITS[key]
+        art = self._sprite_unit(key, d, bucket)
+        if art is not None:
+            self.unit_cache[ck] = art
+            return art
         info = C.FACTION_INFO[fac]
         col, light, dark = info["color"], info["light"], info["dark"]
         deg = bucket * (360 / BUCKETS)
-        d = D.UNITS[key]
         body, turret, barrel = self._draw_unit_raw(key, d, col, light, dark)
         if deg:
             body = pygame.transform.rotozoom(body, -deg, 1.0)
@@ -138,6 +185,41 @@ class Renderer:
                 turret = pygame.transform.rotozoom(turret, -deg, 1.0)
         self.unit_cache[ck] = (body, turret, barrel)
         return self.unit_cache[ck]
+
+    def _sprite_unit(self, key, d, bucket):
+        """用外部贴图生成单位图像，无素材时返回 None。"""
+        info = self.sprites.info(key)
+        if not info:
+            return None
+        deg = bucket * (360 / BUCKETS)
+        if int(info.get("facings", 1)) >= 8:
+            # 步兵为 8 向 SHP，facing 0 朝右上、facing 2 朝正右
+            img = self.sprites.image(key, (int(round(deg / 45.0)) + 2) % 8)
+            if img is None:
+                return None
+            body = self._unit_art(key, d, img)
+            return (body, None, max(6, body.get_width() * 0.4))
+        img = self.sprites.image(key, 0)
+        if img is None:
+            return None
+        base = self._unit_art(key, d, img)
+        body = pygame.transform.rotozoom(base, -(deg - SPRITE_BASE_ANGLE), 1.0)
+        return (body, None, max(6, body.get_width() * 0.4))
+
+    def _unit_art(self, key, d, img):
+        hit = self.unit_art_cache.get(key)
+        if hit is not None:
+            return hit
+        if d.tab == "infantry":
+            factor = 34.0 / img.get_height()
+        else:
+            factor = max(30.0, d.radius * 2 * T * 1.35) / img.get_width()
+        factor = max(0.2, min(2.5, factor))
+        art = pygame.transform.scale(
+            img, (max(6, int(img.get_width() * factor)),
+                  max(6, int(img.get_height() * factor))))
+        self.unit_art_cache[key] = art
+        return art
 
     def _draw_unit_raw(self, key, d, col, light, dark):
         S = 88
@@ -312,9 +394,31 @@ class Renderer:
         ck = (b.key, fac)
         s = self.bld_cache.get(ck)
         if s is None:
-            s = self._draw_building(b.key, D.BUILDINGS[b.key], fac)
+            s, layout = self._build_sprite(b.key, D.BUILDINGS[b.key], fac)
             self.bld_cache[ck] = s
-        return s
+            self.bld_layout[b.key] = layout
+        return s, self.bld_layout[b.key]
+
+    def _build_sprite(self, key, d, fac):
+        """返回 (贴图, 建筑格左上角在贴图内的偏移)。"""
+        if self.sprites.info(key):
+            img = self.sprites.image(key, 0)
+            if img is not None:
+                return self._sprite_building(d, img)
+        return self._draw_building(key, d, fac), (6, 22)
+
+    def _sprite_building(self, d, img):
+        tw, th = d.w * T, d.h * T
+        scale = (tw * 1.12) / img.get_width()
+        iw = max(4, int(img.get_width() * scale))
+        ih = max(4, int(img.get_height() * scale))
+        img = pygame.transform.scale(img, (iw, ih))
+        pad = 4
+        sw = max(tw + 12, iw + 8)
+        sh = ih + pad * 2
+        surf = pygame.Surface((sw, sh), pygame.SRCALPHA)
+        surf.blit(img, ((sw - iw) // 2, pad))
+        return surf, ((sw - tw) // 2, pad + ih - th + 2)
 
     def _draw_building(self, key, d, fac):
         info = C.FACTION_INFO[fac]
@@ -418,9 +522,9 @@ class Renderer:
         return surf
 
     def draw_building(self, screen, b, cam):
-        s = self.building_sprite(b)
-        sx = b.tx * T - cam[0] - 6
-        sy = b.ty * T - cam[1] - 22
+        s, (ox, oy) = self.building_sprite(b)
+        sx = b.tx * T - cam[0] - ox
+        sy = b.ty * T - cam[1] - oy
         if sx < -s.get_width() or sy < -s.get_height() or sx > C.VIEW_W or sy > C.VIEW_H:
             return
         if b.construct_t > 0:
@@ -428,13 +532,13 @@ class Renderer:
             s.set_alpha(150)
         screen.blit(s, (sx, sy))
         if b.construct_t > 0:
-            r = pygame.Rect(sx + 6, sy + 22, b.d.w * T, b.d.h * T)
+            r = pygame.Rect(sx + ox, sy + oy, b.d.w * T, b.d.h * T)
             pygame.draw.rect(screen, (90, 200, 240), r, 1)
             for i in range(4):
                 yy = r.y + int(r.h * (i / 4 + b.construct_t / C.CONSTRUCTION_ANIM * 0.1))
                 pygame.draw.line(screen, (120, 220, 255), (r.x, min(yy, r.bottom)), (r.right, min(yy, r.bottom)), 1)
         if b.flash > 0:
-            pygame.draw.rect(screen, (255, 80, 60), (sx + 6, sy + 22, b.d.w * T, b.d.h * T), 2)
+            pygame.draw.rect(screen, (255, 80, 60), (sx + ox, sy + oy, b.d.w * T, b.d.h * T), 2)
 
     # ================= 主绘制 =================
     def draw(self, screen, cam, hover=None, sel_b=None, placing=None, place_ok=True,
@@ -517,9 +621,9 @@ class Renderer:
             mx, my = pygame.mouse.get_pos()
             tx = int((mx + cam[0]) // T) - d.w // 2
             ty = int((my + cam[1]) // T) - d.h // 2
-            s = self._ghost(placing)
-            gx = tx * T - cam[0] - 6
-            gy = ty * T - cam[1] - 22
+            s, (gox, goy) = self._ghost(placing)
+            gx = tx * T - cam[0] - gox
+            gy = ty * T - cam[1] - goy
             s2 = s.copy()
             s2.set_alpha(160 if place_ok else 90)
             screen.blit(s2, (gx, gy))
@@ -548,9 +652,10 @@ class Renderer:
             fac = self.world.players[0].faction if self.world.players else "allied"
             if d.faction:
                 fac = d.faction
-            s = self._draw_building(key, d, fac)
+            s, layout = self._build_sprite(key, d, fac)
             self.ghost_cache[key] = s
-        return s
+            self.bld_layout[key] = layout
+        return s, self.bld_layout[key]
 
     def _draw_fog(self, screen, cam):
         w = self.world

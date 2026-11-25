@@ -2,7 +2,8 @@
 
 《命令与征服：红色警戒 2 - 尤里的复仇》**单人遭遇战玩法**的非官方致敬复刻版。
 
-- 技术栈：Python 3 + pygame-ce + numpy，全部美术与音效由程序实时生成，**不包含任何 EA 原版资源**
+- 技术栈：Python 3 + pygame-ce + numpy，音效由程序实时合成；单位与建筑贴图来自
+  [RA2 Explorer](https://hansimov.github.io/ra2-explorer/) 的在线派生图集（详见「素材来源」）
 - 平台：Windows（已打包为单文件 exe，双击即玩，无需安装 Python）
 - 范围：三大阵营（盟军 / 苏军 / 尤里）、完整单位与建筑、资源采集、科技树、超级武器、迷雾、
   单人遭遇战与三档 AI；不含原版战役、过场影片与联机对战
@@ -43,6 +44,7 @@ python main.py
 ```
 main.py              入口（崩溃时写 crash.log）
 game/
+  assets/sprites/    单位与建筑精灵图（由 tools/build_sprites.py 生成）
   config.py          全局常量与难度参数
   data.py            单位、建筑、武器、弹头倍率等全部数据
   nav.py             群体流场寻路与 A* 寻路
@@ -50,16 +52,28 @@ game/
   player.py          资源、生产队列、科技与超级武器
   world.py           地图生成、战斗结算、迷雾、胜负判定
   ai.py              AI 经济、建造、防守与进攻
-  render.py          地形、单位、建筑、特效渲染
+  render.py          地形、单位、建筑、特效渲染（贴图优先，缺图回落程序绘制）
   ui.py              侧栏、小地图、信息面板
   audio.py           numpy 合成音效
   app.py             菜单 / 设置 / 对局场景与主循环
 tools/
+  build_sprites.py   从在线图集抓取并切出精灵图
   sim_test.py        无头逻辑回归测试（经济、战斗、超级武器、AI 对局）
   render_smoke.py    无头渲染冒烟测试
 docs/
   游戏规则文档.md     完整规则与数值
 ```
+
+## 素材来源
+
+`game/assets/sprites/` 中的贴图由 `tools/build_sprites.py` 从
+[RA2 Explorer](https://hansimov.github.io/ra2-explorer/) 的在线只读派生图集（npm 包
+`ra2-explorer-pages-core`）切出，源站代码为 MIT 许可。
+
+- 图集是原版游戏模型的渲染派生结果，**图像版权归 Electronic Arts 所有**，本项目仅作学习与
+  致敬用途，未分发任何原版游戏文件（MIX / SHP / VXL / INI 等）
+- 如需重新生成：`python tools/build_sprites.py`（需要 Pillow 与网络，产物会覆盖现有贴图）
+- 删除 `game/assets/sprites/` 后游戏仍可运行，渲染会自动回落到程序化绘制
 
 ## 测试
 
@@ -72,9 +86,11 @@ python tools/render_smoke.py  # 渲染冒烟：菜单、对局、选择、标签
 
 ## 构建 exe
 
+素材需要一起打包进 exe：
+
 ```powershell
-pip install pygame-ce numpy pyinstaller
-python -m PyInstaller --noconfirm --clean --onefile --windowed --name RedStorm main.py
+pip install pygame-ce numpy pillow pyinstaller
+python -m PyInstaller --noconfirm --clean --onefile --windowed --name RedStorm --add-data "game/assets;game/assets" main.py
 ```
 
 产物位于 `dist/RedStorm.exe`，单文件、无控制台、无需额外依赖。
@@ -102,4 +118,9 @@ python -m PyInstaller --noconfirm --clean --onefile --windowed --name RedStorm m
 ## 版权说明
 
 本项目为学习与致敬用途的非官方作品，《命令与征服：红色警戒 2》相关名称与设定的版权归
-Electronic Arts 所有。本项目不包含、不提取、不分发任何原版游戏文件、美术或音频资源。
+Electronic Arts 所有。
+
+- 代码为原创实现，不包含、不提取、不分发任何原版游戏文件（MIX / SHP / VXL / INI / CSF 等）
+- `game/assets/sprites/` 为 RA2 Explorer 在线派生图集的切片，属于原版模型渲染的派生图像，
+  版权归 Electronic Arts；仓库仅用于个人学习，若权利人提出要求应立即删除
+- 音效为 numpy 实时合成，不含原版音频
