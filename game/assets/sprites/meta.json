@@ -3,6 +3,7 @@
   "entity": "GAPILE",
   "kind": "building",
   "facings": 1,
+  "foundation": true,
   "frames": [
    [
     103,
@@ -14,6 +15,7 @@
   "entity": "GACNST",
   "kind": "building",
   "facings": 1,
+  "foundation": true,
   "frames": [
    [
     101,
@@ -25,6 +27,7 @@
   "entity": "ENGINEER",
   "kind": "infantry",
   "facings": 8,
+  "foundation": false,
   "frames": [
    [
     43,
@@ -64,6 +67,7 @@
   "entity": "GAWEAP",
   "kind": "building",
   "facings": 1,
+  "foundation": true,
   "frames": [
    [
     108,
@@ -75,6 +79,7 @@
   "entity": "MTNK",
   "kind": "vehicle",
   "facings": 1,
+  "foundation": false,
   "frames": [
    [
     106,
@@ -86,6 +91,7 @@
   "entity": "CMIN",
   "kind": "vehicle",
   "facings": 1,
+  "foundation": false,
   "frames": [
    [
     108,
@@ -97,6 +103,7 @@
   "entity": "SHAD",
   "kind": "vehicle",
   "facings": 1,
+  "foundation": false,
   "frames": [
    [
     106,
@@ -108,6 +115,7 @@
   "entity": "FV",
   "kind": "vehicle",
   "facings": 1,
+  "foundation": false,
   "frames": [
    [
     106,
@@ -119,6 +127,7 @@
   "entity": "GAPILL",
   "kind": "building",
   "facings": 1,
+  "foundation": true,
   "frames": [
    [
     102,
@@ -130,6 +139,7 @@
   "entity": "GAPOWR",
   "kind": "building",
   "facings": 1,
+  "foundation": true,
   "frames": [
    [
     91,
@@ -141,6 +151,7 @@
   "entity": "SREF",
   "kind": "vehicle",
   "facings": 1,
+  "foundation": false,
   "frames": [
    [
     108,
@@ -152,6 +163,7 @@
   "entity": "ATESLA",
   "kind": "building",
   "facings": 1,
+  "foundation": true,
   "frames": [
    [
     71,
@@ -163,6 +175,7 @@
   "entity": "GAAIRC",
   "kind": "building",
   "facings": 1,
+  "foundation": true,
   "frames": [
    [
     90,
@@ -174,6 +187,7 @@
   "entity": "GAREFN",
   "kind": "building",
   "facings": 1,
+  "foundation": true,
   "frames": [
    [
     106,
@@ -185,6 +199,7 @@
   "entity": "E1",
   "kind": "infantry",
   "facings": 8,
+  "foundation": false,
   "frames": [
    [
     36,
@@ -224,6 +239,7 @@
   "entity": "GGI",
   "kind": "infantry",
   "facings": 8,
+  "foundation": false,
   "frames": [
    [
     40,
@@ -263,6 +279,7 @@
   "entity": "GAWEAT",
   "kind": "building",
   "facings": 1,
+  "foundation": true,
   "frames": [
    [
     98,
@@ -274,6 +291,7 @@
   "entity": "APOC",
   "kind": "vehicle",
   "facings": 1,
+  "foundation": false,
   "frames": [
    [
     106,
@@ -285,6 +303,7 @@
   "entity": "NAHAND",
   "kind": "building",
   "facings": 1,
+  "foundation": true,
   "frames": [
    [
     77,
@@ -296,6 +315,7 @@
   "entity": "E2",
   "kind": "infantry",
   "facings": 8,
+  "foundation": false,
   "frames": [
    [
     51,
@@ -335,6 +355,7 @@
   "entity": "NACNST",
   "kind": "building",
   "facings": 1,
+  "foundation": true,
   "frames": [
    [
     98,
@@ -346,6 +367,7 @@
   "entity": "DRON",
   "kind": "vehicle",
   "facings": 8,
+  "foundation": false,
   "frames": [
    [
     85,
@@ -385,6 +407,7 @@
   "entity": "NAWEAP",
   "kind": "building",
   "facings": 1,
+  "foundation": true,
   "frames": [
    [
     105,
@@ -396,6 +419,7 @@
   "entity": "FLAKT",
   "kind": "infantry",
   "facings": 8,
+  "foundation": false,
   "frames": [
    [
     29,
@@ -435,6 +459,7 @@
   "entity": "NAFLAK",
   "kind": "building",
   "facings": 8,
+  "foundation": true,
   "frames": [
    [
     106,
@@ -474,6 +499,7 @@
   "entity": "HARV",
   "kind": "vehicle",
   "facings": 1,
+  "foundation": false,
   "frames": [
    [
     108,
@@ -485,6 +511,7 @@
   "entity": "ZEP",
   "kind": "vehicle",
   "facings": 1,
+  "foundation": false,
   "frames": [
    [
     106,
@@ -496,6 +523,7 @@
   "entity": "NAPOWR",
   "kind": "building",
   "facings": 1,
+  "foundation": true,
   "frames": [
    [
     93,
@@ -507,6 +535,7 @@
   "entity": "NARADR",
   "kind": "building",
   "facings": 1,
+  "foundation": true,
   "frames": [
    [
     81,
@@ -518,6 +547,7 @@
   "entity": "NAREFN",
   "kind": "building",
   "facings": 1,
+  "foundation": true,
   "frames": [
    [
     105,
@@ -529,6 +559,7 @@
   "entity": "HTNK",
   "kind": "vehicle",
   "facings": 1,
+  "foundation": false,
   "frames": [
    [
     106,
@@ -540,6 +571,7 @@
   "entity": "NALASR",
   "kind": "building",
   "facings": 8,
+  "foundation": true,
   "frames": [
    [
     104,
@@ -579,6 +611,7 @@
   "entity": "NAMISL",
   "kind": "building",
   "facings": 1,
+  "foundation": true,
   "frames": [
    [
     101,
@@ -590,6 +623,7 @@
   "entity": "SHK",
   "kind": "infantry",
   "facings": 8,
+  "foundation": false,
   "frames": [
    [
     61,
@@ -629,6 +663,7 @@
   "entity": "V3",
   "kind": "vehicle",
   "facings": 1,
+  "foundation": false,
   "frames": [
    [
     106,
@@ -640,6 +675,7 @@
   "entity": "YABRCK",
   "kind": "building",
   "facings": 1,
+  "foundation": true,
   "frames": [
    [
     88,
@@ -651,6 +687,7 @@
   "entity": "BRUTE",
   "kind": "infantry",
   "facings": 8,
+  "foundation": false,
   "frames": [
    [
     87,
@@ -690,6 +727,7 @@
   "entity": "CAOS",
   "kind": "vehicle",
   "facings": 1,
+  "foundation": false,
   "frames": [
    [
     108,
@@ -701,6 +739,7 @@
   "entity": "YACNST",
   "kind": "building",
   "facings": 1,
+  "foundation": true,
   "frames": [
    [
     103,
@@ -712,6 +751,7 @@
   "entity": "DISK",
   "kind": "vehicle",
   "facings": 1,
+  "foundation": false,
   "frames": [
    [
     106,
@@ -723,6 +763,7 @@
   "entity": "YAWEAP",
   "kind": "building",
   "facings": 1,
+  "foundation": true,
   "frames": [
    [
     108,
@@ -734,6 +775,7 @@
   "entity": "YAGGUN",
   "kind": "building",
   "facings": 8,
+  "foundation": true,
   "frames": [
    [
     99,
@@ -773,6 +815,7 @@
   "entity": "SMIN",
   "kind": "vehicle",
   "facings": 1,
+  "foundation": false,
   "frames": [
    [
     106,
@@ -784,6 +827,7 @@
   "entity": "INIT",
   "kind": "infantry",
   "facings": 8,
+  "foundation": false,
   "frames": [
    [
     48,
@@ -823,6 +867,7 @@
   "entity": "LTNK",
   "kind": "vehicle",
   "facings": 1,
+  "foundation": false,
   "frames": [
    [
     106,
@@ -834,6 +879,7 @@
   "entity": "TELE",
   "kind": "vehicle",
   "facings": 1,
+  "foundation": false,
   "frames": [
    [
     106,
@@ -845,6 +891,7 @@
   "entity": "MIND",
   "kind": "vehicle",
   "facings": 1,
+  "foundation": false,
   "frames": [
    [
     106,
@@ -856,6 +903,7 @@
   "entity": "YAPOWR",
   "kind": "building",
   "facings": 1,
+  "foundation": true,
   "frames": [
    [
     83,
@@ -867,6 +915,7 @@
   "entity": "YURI",
   "kind": "infantry",
   "facings": 8,
+  "foundation": false,
   "frames": [
    [
     46,
@@ -906,6 +955,7 @@
   "entity": "YAPSYT",
   "kind": "building",
   "facings": 1,
+  "foundation": true,
   "frames": [
    [
     70,
@@ -917,6 +967,7 @@
   "entity": "YACOMD",
   "kind": "building",
   "facings": 1,
+  "foundation": true,
   "frames": [
    [
     83,
@@ -928,6 +979,7 @@
   "entity": "YAREFN",
   "kind": "building",
   "facings": 8,
+  "foundation": true,
   "frames": [
    [
     101,
@@ -967,6 +1019,7 @@
   "entity": "YAPPET",
   "kind": "building",
   "facings": 1,
+  "foundation": true,
   "frames": [
    [
     89,

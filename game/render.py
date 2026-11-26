@@ -389,34 +389,54 @@ class Renderer:
             pygame.draw.circle(screen, (255, 80, 60, 120), (int(sx), int(sy)), int(u.radius + 3), 2)
 
     # ================= 建筑贴图 =================
+    def _terrain_at(self, tx, ty):
+        tx = max(0, min(C.MAP_W - 1, tx))
+        ty = max(0, min(C.MAP_H - 1, ty))
+        return self.world.terrain[ty * C.MAP_W + tx]
+
+    def _terrain_tint(self, t):
+        """地基染色用的地形色，比地面略亮，保留碎石的明暗层次。"""
+        if t == C.T_DIRT:
+            col = (86, 68, 44)
+        elif t in (C.T_ROAD, C.T_ROCK):
+            col = (74, 72, 68)
+        else:
+            col = (54, 84, 46)
+        return tuple(min(255, int(v * 1.45 + 26)) for v in col)
+
     def building_sprite(self, b):
         fac = b.owner.faction if b.owner else "allied"
-        ck = (b.key, fac)
+        t = self._terrain_at(b.tx + b.d.w // 2, b.ty + b.d.h // 2)
+        ck = (b.key, fac, t)
         s = self.bld_cache.get(ck)
         if s is None:
-            s, layout = self._build_sprite(b.key, D.BUILDINGS[b.key], fac)
+            s, layout = self._build_sprite(b.key, D.BUILDINGS[b.key], fac, t)
             self.bld_cache[ck] = s
             self.bld_layout[b.key] = layout
         return s, self.bld_layout[b.key]
 
-    def _build_sprite(self, key, d, fac):
+    def _build_sprite(self, key, d, fac, terrain=C.T_GRASS):
         """返回 (贴图, 建筑格左上角在贴图内的偏移)。"""
         if self.sprites.info(key):
             img = self.sprites.image(key, 0)
-            if img is not None:
-                return self._sprite_building(d, img)
+            base = self.sprites.image(key + "_base", 0)
+            if img is not None and base is not None:
+                return self._sprite_building(d, img, base, terrain)
         return self._draw_building(key, d, fac), (6, 22)
 
-    def _sprite_building(self, d, img):
+    def _sprite_building(self, d, img, base, terrain):
         tw, th = d.w * T, d.h * T
         scale = (tw * 1.12) / img.get_width()
         iw = max(4, int(img.get_width() * scale))
         ih = max(4, int(img.get_height() * scale))
         img = pygame.transform.scale(img, (iw, ih))
+        base = pygame.transform.scale(base, (iw, ih))
+        base.fill(self._terrain_tint(terrain), special_flags=pygame.BLEND_RGBA_MULT)
         pad = 4
         sw = max(tw + 12, iw + 8)
         sh = ih + pad * 2
         surf = pygame.Surface((sw, sh), pygame.SRCALPHA)
+        surf.blit(base, ((sw - iw) // 2, pad))
         surf.blit(img, ((sw - iw) // 2, pad))
         return surf, ((sw - tw) // 2, pad + ih - th + 2)
 

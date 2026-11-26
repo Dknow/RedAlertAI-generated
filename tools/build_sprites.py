@@ -84,21 +84,24 @@ def fetch(url, path):
     return path
 
 
-def fade_foundation(img):
-    """淡化贴图底部的浅色雪地地基，让建筑在草地上不显得突兀。
+def split_foundation(img):
+    """把建筑贴图底部的浅色雪地地基拆出来。
 
-    只降低底部 30% 区域内浅色低饱和像素的不透明度，不改动颜色与形状，
-    避免误删建筑本体的白色墙面。
+    返回 (主体, 地基层)：地基层单独输出，渲染时按建筑所在格子的地形染色，
+    这样泥地、道路上的地基也不会发白。
     """
-    img = img.copy()
-    px = img.load()
-    w, h = img.size
-    for y in range(int(h * 0.70), h):
-        for x in range(w):
-            r, g, b, a = px[x, y]
+    body = img.copy()
+    base = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    src = img.load()
+    px_body = body.load()
+    px_base = base.load()
+    for y in range(int(img.height * 0.70), img.height):
+        for x in range(img.width):
+            r, g, b, a = src[x, y]
             if a and min(r, g, b) >= 205 and max(r, g, b) - min(r, g, b) <= 34:
-                px[x, y] = (r, g, b, 130)
-    return img
+                px_base[x, y] = (r, g, b, a)
+                px_body[x, y] = (0, 0, 0, 0)
+    return body, base
 
 
 def main():
@@ -147,11 +150,13 @@ def main():
                              bounds["y"] + bounds["height"]))
             name = key if facing == 0 else f"{key}_f{facing}"
             if kind == "building":
-                img = fade_foundation(img)
+                img, base = split_foundation(img)
+                if facing == 0:
+                    base.save(os.path.join(OUT_DIR, f"{name}_base.png"))
             img.save(os.path.join(OUT_DIR, f"{name}.png"))
             saved.append(img.size)
         meta[key] = {"entity": eid, "kind": kind, "facings": ta["facing_count"],
-                     "frames": saved}
+                     "foundation": kind == "building", "frames": saved}
         print(f"{key:16s} <- {eid:10s} facings={ta['facing_count']} size={saved[0]}")
 
     with open(os.path.join(OUT_DIR, "meta.json"), "w", encoding="utf-8") as f:
